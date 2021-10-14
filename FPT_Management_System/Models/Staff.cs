@@ -10,6 +10,9 @@ namespace FPT_Management_System.Models
         //khoa ngoai vs bang user
         public string StaffId { get; set; }
 
+        [Required]
+        public string Email { get; set; }
+
         public ApplicationUser User { get; set; }
 
         //for validation

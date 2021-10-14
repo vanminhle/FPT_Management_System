@@ -25,9 +25,9 @@
         @foreach (var item in @Model)
         {
             <tr>
-                <td style="vertical-align: middle" scope="row">@item.StaffUsers.Email</td>
-                @*<td style="vertical-align: middle">@item.Staffs.FullName</td>*@
-                <td>
+                <td style="vertical-align: middle" scope="col">@item.Staffs.Email</td>
+                <td style="vertical-align: middle" scope="col">@item.Staffs.FullName</td>
+                <td scope="col">
                     @Html.ActionLink("Edit Staff Info", "EditStaffAccount", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Delete Staff", "DeleteStaffAccount", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Password Reset", "StaffPasswordReset", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })

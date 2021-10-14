@@ -4,7 +4,6 @@ using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -46,18 +45,18 @@ namespace FPT_Management_System.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var role = _context.Roles.SingleOrDefault(n => n.Name == Role.Staff);
+            /*var role = _context.Roles.SingleOrDefault(n => n.Name == Role.Staff);
 
             List<StaffAccountViewModels> viewModel = _context.Staffs
-                .GroupBy(u => u.User)
+                .GroupBy(u => u.User, s => s.StaffId)
                 .Select(res => new StaffAccountViewModels
                 {
                     StaffUsers = res.Key,
-                    GetStaffsUsers = _context.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)).ToList()
-                })
-                .ToList();
-
-            return View(viewModel);
+                    GetStaffsUsers = _context.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)).ToList(),
+                    Staffs = res.Key
+                }).ToList();*/
+            var staffsList = _context.Staffs.ToList();
+            return View(staffsList);
         }
 
         [HttpGet]
@@ -168,18 +167,15 @@ namespace FPT_Management_System.Controllers
         public ActionResult StaffPasswordReset(string id)
         {
             var staffInDb = _context.Users.SingleOrDefault(i => i.Id == id);
-
             if (staffInDb == null)
             {
                 return HttpNotFound();
             }
-
             var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             userId = staffInDb.Id;
             if (userId != null)
             {
                 UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
-
                 userManager.RemovePassword(userId);
                 string newPassword = "DefaultPassword@123";
                 userManager.AddPassword(userId, newPassword);

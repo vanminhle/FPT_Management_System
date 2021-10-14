@@ -7,7 +7,7 @@
 
 @using (Html.BeginForm("EditStaffAccount", "Admins", FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
+    @Html.HiddenFor(i => i.StaffId)
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(u => u.FullName)

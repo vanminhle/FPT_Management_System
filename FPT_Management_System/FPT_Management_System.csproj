@@ -196,6 +196,14 @@
     <Compile Include="Migrations\202110141203237_EditStaffTable.Designer.cs">
       <DependentUpon>202110141203237_EditStaffTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110141226100_EditStaffTable2.cs" />
+    <Compile Include="Migrations\202110141226100_EditStaffTable2.Designer.cs">
+      <DependentUpon>202110141226100_EditStaffTable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110141253469_AddTrainersTable.cs" />
+    <Compile Include="Migrations\202110141253469_AddTrainersTable.Designer.cs">
+      <DependentUpon>202110141253469_AddTrainersTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -204,10 +212,12 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\Trainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Role.cs" />
     <Compile Include="ViewModels\StaffAccountViewModels.cs" />
+    <Compile Include="ViewModels\TrainerAccountViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -268,11 +278,15 @@
     <Content Include="Views\CourseCategories\Index.cshtml" />
     <Content Include="Views\CourseCategories\CreateCategory.cshtml" />
     <Content Include="Views\CourseCategories\EditCategory.cshtml" />
-    <Content Include="Views\Admins\Index.cshtml" />
+    <Content Include="Views\Admins\IndexStaff.cshtml" />
     <Content Include="Views\Admins\CreateStaffAccount.cshtml" />
     <Content Include="Views\Admins\EditStaffAccount.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Admins\StaffInfoDetails.cshtml" />
+    <Content Include="Views\Admins\CreateTrainerAccount.cshtml" />
+    <Content Include="Views\Admins\EditTrainerAccount.cshtml" />
+    <Content Include="Views\Admins\TrainerInfoDetails.cshtml" />
+    <Content Include="Views\Admins\IndexTrainer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -305,6 +319,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110141203237_EditStaffTable.resx">
       <DependentUpon>202110141203237_EditStaffTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110141226100_EditStaffTable2.resx">
+      <DependentUpon>202110141226100_EditStaffTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110141253469_AddTrainersTable.resx">
+      <DependentUpon>202110141253469_AddTrainersTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

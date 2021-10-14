@@ -1,20 +1,20 @@
-﻿@model FPT_Management_System.ViewModels.StaffAccountViewModels
+﻿@model FPT_Management_System.ViewModels.TrainerAccountViewModels
 @{
-    ViewBag.Title = "CreateStaffAccount";
+    ViewBag.Title = "CreateTrainerAccount";
 }
 
-<h2>Create Staff Account</h2>
+<h2>Create Trainer Account</h2>
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
     <div class="form-group">
-        @Html.ActionLink("Back to Staff List ", "IndexStaff", "Admins", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to Trainer List ", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
     </div>
 </div>
 
-@using (Html.BeginForm("CreateStaffAccount", "Admins", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("CreateTrainerAccount", "Admins", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new staff account.</h4>
+    <h4>Create a new trainer account.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -36,21 +36,27 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Staffs.FullName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Trainers.FullName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Staffs.FullName, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Trainers.FullName, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Staffs.Age, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Trainers.Age, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Staffs.Age, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Trainers.Age, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Staffs.Address, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Trainers.Address, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Staffs.Address, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Trainers.Address, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Trainers.Specialty, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Trainers.Specialty, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">

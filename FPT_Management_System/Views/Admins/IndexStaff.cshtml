@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<FPT_Management_System.ViewModels.StaffAccountViewModels>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "IndexStaff";
 }
 
 <div class="page-header">
@@ -25,13 +25,14 @@
         @foreach (var item in @Model)
         {
             <tr>
-                <td style="vertical-align: middle" scope="col">@item.Staffs.Email</td>
-                <td style="vertical-align: middle" scope="col">@item.Staffs.FullName</td>
-                <td scope="col">
+                <td style="vertical-align: middle" scope="row">@item.StaffUsers.Email</td>
+                <td style="vertical-align: middle" scope="row">#</td>
+                @*<td style="vertical-align: middle">@item.Staffs.FullName</td>*@
+                <td>
                     @Html.ActionLink("Edit Staff Info", "EditStaffAccount", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Delete Staff", "DeleteStaffAccount", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Password Reset", "StaffPasswordReset", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Details", "StaffInfoDetails", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Staff Details", "StaffInfoDetails", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }

@@ -132,5 +132,7 @@ namespace FPT_Management_System.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Admins");
         }
+
+        HELLO
     }
 }

@@ -29,9 +29,9 @@
                 @*<td style="vertical-align: middle">@item.Staffs.FullName</td>*@
                 <td>
                     @Html.ActionLink("Edit Staff Info", "EditStaffAccount", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Delete", "DeleteCategory", "CourseCategories", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Password Reset", "DeleteCategory", "CourseCategories", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Details", "DeleteCategory", "CourseCategories", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete Staff", "DeleteStaffAccount", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Password Reset", "StaffPasswordReset", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Details", "StaffInfoDetails", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }

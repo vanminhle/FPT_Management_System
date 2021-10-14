@@ -2,6 +2,7 @@
 using FPT_Management_System.Utils;
 using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,6 @@ namespace FPT_Management_System.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> CreateStaffAccount(StaffAccountViewModels viewModel)
         {
             if (ModelState.IsValid)
@@ -121,18 +121,71 @@ namespace FPT_Management_System.Controllers
             {
                 return View(staff);
             }
-            var staffInDb = _context.Staffs.SingleOrDefault(t => t.StaffId == staff.StaffId);
-            if (staffInDb == null)
+            var staffInfoInDb = _context.Staffs.SingleOrDefault(t => t.StaffId == staff.StaffId);
+
+            if (staffInfoInDb == null)
             {
                 return HttpNotFound();
             }
-            staffInDb.FullName = staff.FullName;
-            staffInDb.Age = staff.Age;
-            staffInDb.Address = staff.Address;
+            staffInfoInDb.FullName = staff.FullName;
+            staffInfoInDb.Age = staff.Age;
+            staffInfoInDb.Address = staff.Address;
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Admins");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteStaffAccount(string id)
+        {
+            var staffInDb = _context.Users.SingleOrDefault(i => i.Id == id);
+            var staffInfoInDb = _context.Staffs.SingleOrDefault(i => i.StaffId == id);
+            if (staffInDb == null || staffInfoInDb == null)
+            {
+                return HttpNotFound();
+            }
+            _context.Users.Remove(staffInDb);
+            _context.Staffs.Remove(staffInfoInDb);
             _context.SaveChanges();
             return RedirectToAction("Index", "Admins");
         }
 
-        HELLO
+        [HttpGet]
+        public ActionResult StaffInfoDetails(string id)
+        {
+            var staffId = User.Identity.GetUserId();
+
+            var staffInfoInDb = _context.Staffs
+                .SingleOrDefault(t => t.StaffId == id);
+
+            if (staffInfoInDb == null)
+            {
+                return HttpNotFound();
+            }
+            return View(staffInfoInDb);
+        }
+
+        public ActionResult StaffPasswordReset(string id)
+        {
+            var staffInDb = _context.Users.SingleOrDefault(i => i.Id == id);
+
+            if (staffInDb == null)
+            {
+                return HttpNotFound();
+            }
+
+            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            userId = staffInDb.Id;
+            if (userId != null)
+            {
+                UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
+
+                userManager.RemovePassword(userId);
+                string newPassword = "DefaultPassword@123";
+                userManager.AddPassword(userId, newPassword);
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Admins");
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using FPT_Management_System.Models;
-using FPT_Management_System.Utils;
 using System;
 using System.Linq;
 using System.Net;
@@ -7,7 +6,7 @@ using System.Web.Mvc;
 
 namespace FPT_Management_System.Controllers
 {
-    [Authorize(Roles = Role.Staff)]
+    [Authorize(Roles = "staff")]
     public class CourseCategoriesController : Controller
     {
         public ApplicationDbContext _context;

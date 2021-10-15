@@ -15,6 +15,8 @@ namespace FPT_Management_System.Models
         public DbSet<Course> Courses { get; set; }
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<Trainee> Trainees { get; set; }
+        public DbSet<TraineesToCourse> TraineesToCourses { get; set; }
+        public DbSet<TrainersToCourse> TrainersToCourses { get; set; }
 
         public static ApplicationDbContext Create()
         {

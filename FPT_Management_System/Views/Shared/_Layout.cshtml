@@ -1,5 +1,4 @@
-﻿@using FPT_Management_System.Utils
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -24,16 +23,24 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.IsInRole(Role.Admin))
+                        if (User.IsInRole("admin"))
                         {
                             <li>@Html.ActionLink("Staff", "IndexStaff", "Admins")</li>
                             <li>@Html.ActionLink("Trainer", "IndexTrainer", "Admins")</li>
                         }
-                        else if (User.IsInRole(Role.Staff))
+                        else if (User.IsInRole("staff"))
                         {
                             <li>@Html.ActionLink("Categories", "Index", "CourseCategories")</li>
-                            <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
+                            <li>@Html.ActionLink("Courses", "CourseIndex", "Courses")</li>
                             <li>@Html.ActionLink("Trainee", "IndexTrainee", "Staffs")</li>
+                        }
+                        else if (User.IsInRole("trainer"))
+                        {
+                            <li>@Html.ActionLink("My Profile", "TrainerInfoDetails", "Admins")</li>
+                        }
+                        else if (User.IsInRole("trainee"))
+                        {
+                            <li>@Html.ActionLink("My Profile", "TraineeInfoDetails", "Staffs")</li>
                         }
                     }
                 </ul>

@@ -9,7 +9,17 @@
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
     <div class="form-group">
-        @Html.ActionLink("Back to Trainer List ", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Back to Trainer List", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
+            }
+            if (User.IsInRole("trainer"))
+            {
+                @Html.ActionLink("Edit My Profile", "EditTrainerAccount", "Admins", new { @class = "btn btn-primary" })
+            }
+        }
     </div>
 </div>
 

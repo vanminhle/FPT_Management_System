@@ -1,5 +1,4 @@
 ﻿using FPT_Management_System.Models;
-using FPT_Management_System.Utils;
 using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -12,7 +11,6 @@ using System.Web.Mvc;
 
 namespace FPT_Management_System.Controllers
 {
-    [Authorize(Roles = Role.Admin)]
     public class AdminsController : Controller
     {
         //tao ket noi
@@ -43,31 +41,35 @@ namespace FPT_Management_System.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult IndexStaff()
         {
-            var role = _context.Roles.SingleOrDefault(n => n.Name == Role.Staff);
+            var role = _context.Roles.SingleOrDefault(n => n.Name == "staff");
 
             List<StaffAccountViewModels> viewModel = _context.Staffs
-                .GroupBy(u => u.User, s => s.StaffId)
+                .GroupBy(u => u.User)
                 .Select(res => new StaffAccountViewModels
                 {
                     StaffUsers = res.Key,
                     GetStaffsUsers = _context.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)).ToList(),
-                }).ToList();
+                })
+                .ToList();
             return View(viewModel);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult CreateStaffAccount()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> CreateStaffAccount(StaffAccountViewModels viewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 { UserName = viewModel.RegisterViewModels.Email, Email = viewModel.RegisterViewModels.Email };
@@ -78,12 +80,12 @@ namespace FPT_Management_System.Controllers
                     StaffId = staffId,
                     FullName = viewModel.Staffs.FullName,
                     Age = viewModel.Staffs.Age,
-                    Address = viewModel.Staffs.Address
+                    Address = viewModel.Staffs.Address,
                 };
 
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, Role.Staff);
+                    await UserManager.AddToRoleAsync(user.Id, "staff");
                     _context.Staffs.Add(newStaff);
                     _context.SaveChanges();
                 }
@@ -101,6 +103,7 @@ namespace FPT_Management_System.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditStaffAccount(string id)
         {
@@ -112,6 +115,7 @@ namespace FPT_Management_System.Controllers
             return View(staffInDb);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditStaffAccount(Staff staff)
         {
@@ -133,6 +137,7 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexStaff", "Admins");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult DeleteStaffAccount(string id)
         {
@@ -148,6 +153,7 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexStaff", "Admins");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult StaffInfoDetails(string id)
         {
@@ -163,6 +169,7 @@ namespace FPT_Management_System.Controllers
             return View(staffInfoInDb);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult StaffPasswordReset(string id)
         {
             var staffInDb = _context.Users.SingleOrDefault(i => i.Id == id);
@@ -187,10 +194,11 @@ namespace FPT_Management_System.Controllers
         /// FOR TRAINER
         /// </summary>
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult IndexTrainer()
         {
-            var role = _context.Roles.SingleOrDefault(n => n.Name == Role.Trainer);
+            var role = _context.Roles.SingleOrDefault(n => n.Name == "trainer");
 
             List<TrainerAccountViewModels> viewModel = _context.Trainers
                 .GroupBy(u => u.User, s => s.TrainerId)
@@ -203,16 +211,18 @@ namespace FPT_Management_System.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult CreateTrainerAccount()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> CreateTrainerAccount(TrainerAccountViewModels viewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 { UserName = viewModel.RegisterViewModels.Email, Email = viewModel.RegisterViewModels.Email };
@@ -229,7 +239,7 @@ namespace FPT_Management_System.Controllers
 
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, Role.Trainer);
+                    await UserManager.AddToRoleAsync(user.Id, "trainer");
                     _context.Trainers.Add(newTrainer);
                     _context.SaveChanges();
                 }
@@ -239,6 +249,7 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditTrainerAccount(string id)
         {
@@ -250,6 +261,7 @@ namespace FPT_Management_System.Controllers
             return View(trainerInDb);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditTrainerAccount(Trainer trainer)
         {
@@ -273,6 +285,7 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult DeleteTrainerAccount(string id)
         {
@@ -288,6 +301,7 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult TrainerInfoDetails(string id)
         {
@@ -303,6 +317,7 @@ namespace FPT_Management_System.Controllers
             return View(trainerInfoInDb);
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult TrainerPasswordReset(string id)
         {
             var trainerInDb = _context.Users.SingleOrDefault(i => i.Id == id);

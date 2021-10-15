@@ -31,6 +31,7 @@ namespace FPT_Management_System.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -79,6 +80,10 @@ namespace FPT_Management_System.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Password")]
+        public string FullName { get; set; }
     }
 
     public class ResetPasswordViewModel

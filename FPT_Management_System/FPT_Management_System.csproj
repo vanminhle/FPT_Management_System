@@ -213,6 +213,10 @@
     <Compile Include="Migrations\202110141446050_EditTraineeTable.Designer.cs">
       <DependentUpon>202110141446050_EditTraineeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202110151422213_CreateTraineesAndTrainersToCoursesTable.cs" />
+    <Compile Include="Migrations\202110151422213_CreateTraineesAndTrainersToCoursesTable.Designer.cs">
+      <DependentUpon>202110151422213_CreateTraineesAndTrainersToCoursesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -222,10 +226,12 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Trainee.cs" />
+    <Compile Include="Models\TraineesToCourse.cs" />
     <Compile Include="Models\Trainer.cs" />
+    <Compile Include="Models\TrainersToCourse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utils\Role.cs" />
+    <Compile Include="ViewModels\CourseCategoriesViewModels.cs" />
     <Compile Include="ViewModels\StaffAccountViewModels.cs" />
     <Compile Include="ViewModels\TraineeAccountViewModels.cs" />
     <Compile Include="ViewModels\TrainerAccountViewModels.cs" />
@@ -292,7 +298,7 @@
     <Content Include="Views\Admins\IndexStaff.cshtml" />
     <Content Include="Views\Admins\CreateStaffAccount.cshtml" />
     <Content Include="Views\Admins\EditStaffAccount.cshtml" />
-    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Courses\CourseIndex.cshtml" />
     <Content Include="Views\Admins\StaffInfoDetails.cshtml" />
     <Content Include="Views\Admins\CreateTrainerAccount.cshtml" />
     <Content Include="Views\Admins\EditTrainerAccount.cshtml" />
@@ -302,6 +308,8 @@
     <Content Include="Views\Staffs\CreateTraineeAccount.cshtml" />
     <Content Include="Views\Staffs\EditTraineeAccount.cshtml" />
     <Content Include="Views\Staffs\TraineeInfoDetails.cshtml" />
+    <Content Include="Views\Courses\CourseCreate.cshtml" />
+    <Content Include="Views\Courses\CourseEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -346,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202110141446050_EditTraineeTable.resx">
       <DependentUpon>202110141446050_EditTraineeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110151422213_CreateTraineesAndTrainersToCoursesTable.resx">
+      <DependentUpon>202110151422213_CreateTraineesAndTrainersToCoursesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

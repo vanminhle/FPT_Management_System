@@ -9,7 +9,14 @@
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
     <div class="form-group">
-        @Html.ActionLink("Back to Trainee List ", "IndexTrainee", "Staffs", new { @class = "btn btn-primary" })
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("staff"))
+            {
+                @Html.ActionLink("Back to Trainee List ", "IndexTrainee", "Staffs", new { @class = "btn btn-primary" })
+
+            }
+        }
     </div>
 </div>
 

@@ -7,7 +7,6 @@ namespace FPT_Management_System.Models
     {
         [Key]
         [ForeignKey("User")]
-        //khoa ngoai vs bang user
         public string StaffId { get; set; }
 
         public ApplicationUser User { get; set; }

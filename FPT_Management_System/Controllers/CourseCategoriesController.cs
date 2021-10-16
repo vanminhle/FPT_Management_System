@@ -31,6 +31,7 @@ namespace FPT_Management_System.Controllers
         }
 
         //Categories/Create
+        [HttpGet]
         public ActionResult CreateCategory()
         {
             return View();

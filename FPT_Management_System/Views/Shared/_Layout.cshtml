@@ -33,6 +33,8 @@
                             <li>@Html.ActionLink("Categories", "Index", "CourseCategories")</li>
                             <li>@Html.ActionLink("Courses", "CourseIndex", "Courses")</li>
                             <li>@Html.ActionLink("Trainee", "IndexTrainee", "Staffs")</li>
+                            <li>@Html.ActionLink("Trainees & Courses", "GetTrainees", "CoursesAssign")</li>
+                            <li>@Html.ActionLink("Trainer & Courses", "GetTrainers", "CoursesAssign")</li>
                         }
                         else if (User.IsInRole("trainer"))
                         {

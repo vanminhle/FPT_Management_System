@@ -3,16 +3,13 @@
     ViewBag.Title = "Edit Staff Account";
 }
 
-<h2>Edit Staff Account</h2>
+<h2 style="margin-top: 45px; margin-bottom: 35px;">Edit Staff Account</h2>
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-    <div class="form-group">
-        @Html.ActionLink("Back to Staff List ", "IndexStaff", "Admins", new { @class = "btn btn-primary" })
-    </div>
-</div>
+
 
 @using (Html.BeginForm("EditStaffAccount", "Admins", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(i => i.StaffId)
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -32,3 +29,9 @@
 
     <button type="submit" class="btn btn-primary">Edit</button>
 }
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 10px; margin-top: 35px;">
+    <div class="form-group">
+        @Html.ActionLink("Back to Staff List ", "IndexStaff", "Admins", new { @class = "btn btn-primary" })
+    </div>
+</div>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FPT_Management_System.ViewModels.TraineeAccountViewModels>
+﻿@model IEnumerable<FPT_Management_System.Models.Trainee>
 @{
     ViewBag.Title = "IndexTrainee";
 }
@@ -25,14 +25,13 @@
         @foreach (var item in @Model)
         {
             <tr>
-                <td style="vertical-align: middle" scope="row">@item.TraineeUsers.Email</td>
-                <td style="vertical-align: middle" scope="row">#</td>
-                @*<td style="vertical-align: middle">@item.Staffs.FullName</td>*@
+                <td style="vertical-align: middle" scope="row">@item.User.Email</td>
+                <td style="vertical-align: middle">@item.FullName</td>
                 <td>
-                    @Html.ActionLink("Edit Trainee Info", "EditTraineeAccount", "Staffs", new { id = @item.TraineeUsers.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Delete Trainee", "DeleteTraineeAccount", "Staffs", new { id = @item.TraineeUsers.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Password Reset", "TraineePasswordReset", "Staffs", new { id = @item.TraineeUsers.Id }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Trainee Details", "TraineeInfoDetails", "Staffs", new { id = @item.TraineeUsers.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Edit Trainee Info", "EditTraineeAccount", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete Trainee", "DeleteTraineeAccount", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Password Reset", "TraineePasswordReset", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Trainee Details", "TraineeInfoDetails", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-info" })
                 </td>
             </tr>
         }

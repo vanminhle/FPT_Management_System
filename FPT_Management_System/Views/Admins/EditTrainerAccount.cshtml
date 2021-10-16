@@ -3,26 +3,11 @@
     ViewBag.Title = "Edit Trainer Account";
 }
 
-<h2>Edit Trainer Account</h2>
-
-<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-    <div class="form-group">
-        @if (User.Identity.IsAuthenticated)
-        {
-            if (User.IsInRole("admin"))
-            {
-                @Html.ActionLink("Back to Trainer List", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
-            }
-            if (User.IsInRole("trainer"))
-            {
-                @Html.ActionLink("Back to My Profile", "TrainerInfoDetails", "Admins", new { @class = "btn btn-primary" })
-            }
-        }
-    </div>
-</div>
+<h2 style="margin-top: 45px; margin-bottom: 35px;">Edit Trainer Account</h2>
 
 @using (Html.BeginForm("EditTrainerAccount", "Admins", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(i => i.TrainerId)
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -47,3 +32,10 @@
 
     <button type="submit" class="btn btn-primary">Edit</button>
 }
+
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 10px; margin-top: 35px;">
+    <div class="form-group">
+        @Html.ActionLink("Back to Trainer List", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
+    </div>
+</div>

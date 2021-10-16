@@ -3,25 +3,8 @@
     ViewBag.Title = "Trainer Info Details";
 }
 
-<div class="page-header">
-    <h2 style="margin-bottom: 15px">Trainer Info Deatils</h2>
-</div>
+<h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">Trainer Info Details</h2>
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-    <div class="form-group">
-        @if (User.Identity.IsAuthenticated)
-        {
-            if (User.IsInRole("admin"))
-            {
-                @Html.ActionLink("Back to Trainer List", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
-            }
-            if (User.IsInRole("trainer"))
-            {
-                @Html.ActionLink("Edit My Profile", "EditTrainerAccount", "Admins", new { @class = "btn btn-primary" })
-            }
-        }
-    </div>
-</div>
 
 <div class="panel panel-default">
     <div class="panel-body">
@@ -29,5 +12,12 @@
         <p>Trainer Age: @Model.Age</p>
         <p>Trainer Address: @Model.Address</p>
         <p>Trainer Specialty: @Model.Specialty</p>
+    </div>
+</div>
+
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+    <div class="form-group">
+        @Html.ActionLink("Back to Trainer List", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
     </div>
 </div>

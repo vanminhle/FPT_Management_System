@@ -25,12 +25,9 @@ namespace FPT_Management_System.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-#pragma warning disable RCS1155 // Use StringComparison when comparing strings.
-                courses = courses.Where(t => t.Description.ToLower().Contains(searchString.ToLower())
-#pragma warning restore RCS1155 // Use StringComparison when comparing strings.
-#pragma warning disable RCS1155 // Use StringComparison when comparing strings.
+                courses = courses
+                    .Where(t => t.Description.ToLower().Contains(searchString.ToLower())
                             || t.CourseCategory.Description.ToLower().Contains(searchString.ToLower())
-#pragma warning restore RCS1155 // Use StringComparison when comparing strings.
                 ).ToList();
             }
 

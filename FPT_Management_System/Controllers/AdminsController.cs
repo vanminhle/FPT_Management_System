@@ -3,7 +3,6 @@ using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -45,17 +44,10 @@ namespace FPT_Management_System.Controllers
         [HttpGet]
         public ActionResult IndexStaff()
         {
-            var role = _context.Roles.SingleOrDefault(n => n.Name == "staff");
+            var staff = _context.Staffs.ToList();
+            var user = _context.Users.ToList();
 
-            List<StaffAccountViewModels> viewModel = _context.Staffs
-                .GroupBy(u => u.User)
-                .Select(res => new StaffAccountViewModels
-                {
-                    StaffUsers = res.Key,
-                    GetStaffsUsers = _context.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)).ToList(),
-                })
-                .ToList();
-            return View(viewModel);
+            return View(staff);
         }
 
         [Authorize(Roles = "admin")]
@@ -198,17 +190,10 @@ namespace FPT_Management_System.Controllers
         [HttpGet]
         public ActionResult IndexTrainer()
         {
-            var role = _context.Roles.SingleOrDefault(n => n.Name == "trainer");
+            var trainer = _context.Trainers.ToList();
+            var user = _context.Users.ToList();
 
-            List<TrainerAccountViewModels> viewModel = _context.Trainers
-                .GroupBy(u => u.User, s => s.TrainerId)
-                .Select(res => new TrainerAccountViewModels
-                {
-                    TrainerUsers = res.Key,
-                    GetTrainerUsers = _context.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)).ToList(),
-                    //Staffs = res.Key
-                }).ToList();
-            return View(viewModel);
+            return View(trainer);
         }
 
         [Authorize(Roles = "admin")]

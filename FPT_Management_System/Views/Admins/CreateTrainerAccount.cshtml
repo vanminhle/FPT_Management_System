@@ -1,21 +1,14 @@
 ﻿@model FPT_Management_System.ViewModels.TrainerAccountViewModels
 @{
-    ViewBag.Title = "CreateTrainerAccount";
+    ViewBag.Title = "Create Trainer Account";
 }
 
-<h2>Create Trainer Account</h2>
+<h2 style="margin-top: 45px; margin-bottom: 35px;">Create Trainer Account</h2>
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-    <div class="form-group">
-        @Html.ActionLink("Back to Trainer List ", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
-    </div>
-</div>
 
 @using (Html.BeginForm("CreateTrainerAccount", "Admins", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new trainer account.</h4>
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.RegisterViewModels.Email, new { @class = "col-md-2 control-label" })
@@ -65,6 +58,13 @@
         </div>
     </div>
 }
+
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 10px; margin-top: 35px;">
+    <div class="form-group">
+        @Html.ActionLink("Back to Trainer List ", "IndexTrainer", "Admins", new { @class = "btn btn-primary" })
+    </div>
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

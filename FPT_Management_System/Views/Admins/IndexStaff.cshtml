@@ -1,11 +1,10 @@
-﻿@model IEnumerable<FPT_Management_System.ViewModels.StaffAccountViewModels>
+﻿@model IEnumerable<FPT_Management_System.Models.Staff>
 @{
-    ViewBag.Title = "IndexStaff";
+    ViewBag.Title = "Index Staff";
 }
 
-<div class="page-header">
-    <h2 style="margin-bottom: 15px">List Of Staff Account</h2>
-</div>
+<h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">List Of Staff Account</h2>
+
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
     <div class="form-group">
@@ -24,17 +23,16 @@
     <tbody>
         @foreach (var item in @Model)
         {
-        <tr>
-            <td style="vertical-align: middle" scope="row">@item.StaffUsers.Email</td>
-            <td style="vertical-align: middle">#</td>
-            @*<td style="vertical-align: middle">@item.Staffs.FullName</td>*@
-            <td>
-                @Html.ActionLink("Edit Staff Info", "EditStaffAccount", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Delete Staff", "DeleteStaffAccount", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Password Reset", "StaffPasswordReset", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
-                @Html.ActionLink("Staff Details", "StaffInfoDetails", "Admins", new { id = @item.StaffUsers.Id }, new { @class = "btn btn-primary" })
-            </td>
-        </tr>
+            <tr>
+                <th style="vertical-align: middle" scope="row" class="col-sm-3">@item.User.Email</th>
+                <td style="vertical-align: middle" class="col-sm-3">@item.FullName</td>
+                <td>
+                    @Html.ActionLink("Edit Staff Info", "EditStaffAccount", "Admins", new { id = @item.StaffId }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete Staff", "DeleteStaffAccount", "Admins", new { id = @item.StaffId }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Password Reset", "StaffPasswordReset", "Admins", new { id = @item.StaffId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Staff Details", "StaffInfoDetails", "Admins", new { id = @item.StaffId }, new { @class = "btn btn-info" })
+                </td>
+            </tr>
         }
     </tbody>
 </table>

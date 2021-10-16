@@ -3,7 +3,6 @@ using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -42,16 +41,10 @@ namespace FPT_Management_System.Controllers
         [Authorize(Roles = "staff")]
         public ActionResult IndexTrainee()
         {
-            var role = _context.Roles.SingleOrDefault(n => n.Name == "trainee");
+            var trainee = _context.Trainees.ToList();
+            var user = _context.Users.ToList();
 
-            List<TraineeAccountViewModels> viewModel = _context.Trainees
-                .GroupBy(u => u.User, s => s.TraineeId)
-                .Select(res => new TraineeAccountViewModels
-                {
-                    TraineeUsers = res.Key,
-                    GetTraineeUsers = _context.Users.Where(m => m.Roles.Any(r => r.RoleId == role.Id)).ToList(),
-                }).ToList();
-            return View(viewModel);
+            return View(trainee);
         }
 
         [Authorize(Roles = "staff")]

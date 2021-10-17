@@ -11,6 +11,14 @@
     <div class="form-group">
         @Html.ActionLink("Create a New Trainee", "CreateTraineeAccount", "Staffs", new { @class = "btn btn-primary" })
     </div>
+
+    @using (Html.BeginForm("IndexTrainee", "Staffs", FormMethod.Get))
+    {
+        <div class="form-inline">
+            @Html.TextBox("searchTrainee", null, new { @class = "form-control" })
+            <button type="Submit" class="btn btn-primary">Search</button>
+        </div>
+    }
 </div>
 
 <table class="table table-bordered">
@@ -18,6 +26,7 @@
         <tr>
             <th scope="col">Trainee Email</th>
             <th scope="col">Trainee FullName</th>
+            <th scope="col">Trainee Age</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -27,6 +36,7 @@
             <tr>
                 <td style="vertical-align: middle" scope="row">@item.User.Email</td>
                 <td style="vertical-align: middle">@item.FullName</td>
+                <td style="vertical-align: middle">@item.Age</td>
                 <td>
                     @Html.ActionLink("Edit Trainee Info", "EditTraineeAccount", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Delete Trainee", "DeleteTraineeAccount", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-danger" })

@@ -1,4 +1,5 @@
 ﻿using FPT_Management_System.Models;
+using FPT_Management_System.Utils;
 using System;
 using System.Linq;
 using System.Net;
@@ -6,7 +7,7 @@ using System.Web.Mvc;
 
 namespace FPT_Management_System.Controllers
 {
-    [Authorize(Roles = "staff")]
+    [Authorize(Roles = Role.Staff)]
     public class CourseCategoriesController : Controller
     {
         public ApplicationDbContext _context;
@@ -24,7 +25,7 @@ namespace FPT_Management_System.Controllers
 
             if (!String.IsNullOrEmpty(searchCategory))
             {
-                categoryInDb = categoryInDb.FindAll(s => s.Name.Contains(searchCategory));
+                categoryInDb = categoryInDb.FindAll(n => n.Name.ToLower().Contains(searchCategory.ToLower()));
             }
 
             return View(categoryInDb);

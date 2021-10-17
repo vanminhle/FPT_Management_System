@@ -175,8 +175,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
-    <Compile Include="Controllers\TraineesController.cs" />
-    <Compile Include="Controllers\TrainersController.cs" />
+    <Compile Include="Controllers\TraineeController.cs" />
+    <Compile Include="Controllers\TrainerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -325,11 +325,14 @@
     <Content Include="Views\CoursesAssign\AddTrainer.cshtml" />
     <Content Include="Views\CoursesAssign\RemoveTrainer.cshtml" />
     <Content Include="Views\CoursesAssign\RemoveTrainee.cshtml" />
+    <Content Include="Views\Trainee\TraineeProfile.cshtml" />
+    <Content Include="Views\Trainer\TrainerProfile.cshtml" />
+    <Content Include="Views\Trainer\EditTrainerAccount.cshtml" />
+    <Content Include="Views\Trainee\GetTraineeCourses.cshtml" />
+    <Content Include="Views\Trainer\GetTrainerCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Trainees\" />
-    <Folder Include="Views\Trainers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -1,0 +1,14 @@
+﻿@model FPT_Management_System.Models.Trainee
+@{
+    ViewBag.Title = "Trainee Information";
+}
+
+<h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">Trainer Profile</h2>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>Full Name: @Model.FullName</p>
+        <p>Date or Birth: @Model.DateOfBirth.ToString("d")</p>
+        <p>Education: @Model.Education</p>
+    </div>
+</div>

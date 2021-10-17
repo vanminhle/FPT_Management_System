@@ -12,6 +12,14 @@
     <div class="form-group">
         @Html.ActionLink("Create a New Category", "CreateCategory", "CourseCategories", new { @class = "btn btn-primary" })
     </div>
+
+    @using (Html.BeginForm("Index", "CourseCategories", FormMethod.Get))
+    {
+        <div class="form-inline">
+            @Html.TextBox("searchCategory", null, new { @class = "form-control" })
+            <button type="Submit" class="btn btn-primary">Search</button>
+        </div>
+    }
 </div>
 
 <table class="table table-bordered">

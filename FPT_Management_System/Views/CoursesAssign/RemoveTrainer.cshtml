@@ -10,7 +10,6 @@
 @using (@Html.BeginForm("RemoveTrainer", "CoursesAssign", FormMethod.Post))
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger", @style = "margin-bottom:28px;" })
-
     <div class="form-group">
         <label>Course</label>
         @Html.DropDownListFor(m => m.CourseId,

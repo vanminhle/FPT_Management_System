@@ -1,4 +1,5 @@
 ﻿using FPT_Management_System.Models;
+using FPT_Management_System.Utils;
 using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace FPT_Management_System.Controllers
 {
+    [Authorize(Roles = Role.Admin)]
     public class AdminsController : Controller
     {
         //tao ket noi
@@ -40,7 +42,6 @@ namespace FPT_Management_System.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult IndexStaff()
         {
@@ -50,14 +51,12 @@ namespace FPT_Management_System.Controllers
             return View(staff);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult CreateStaffAccount()
         {
             return View();
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> CreateStaffAccount(StaffAccountViewModels viewModel)
         {
@@ -107,7 +106,6 @@ namespace FPT_Management_System.Controllers
             return View(staffInDb);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditStaffAccount(Staff staff)
         {
@@ -129,7 +127,6 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexStaff", "Admins");
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult DeleteStaffAccount(string id)
         {
@@ -145,7 +142,6 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexStaff", "Admins");
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult StaffInfoDetails(string id)
         {
@@ -161,7 +157,6 @@ namespace FPT_Management_System.Controllers
             return View(staffInfoInDb);
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult StaffPasswordReset(string id)
         {
             var staffInDb = _context.Users.SingleOrDefault(i => i.Id == id);
@@ -186,7 +181,6 @@ namespace FPT_Management_System.Controllers
         /// FOR TRAINER
         /// </summary>
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult IndexTrainer()
         {
@@ -196,14 +190,12 @@ namespace FPT_Management_System.Controllers
             return View(trainer);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult CreateTrainerAccount()
         {
             return View();
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> CreateTrainerAccount(TrainerAccountViewModels viewModel)
         {
@@ -234,7 +226,6 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditTrainerAccount(string id)
         {
@@ -246,7 +237,6 @@ namespace FPT_Management_System.Controllers
             return View(trainerInDb);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditTrainerAccount(Trainer trainer)
         {
@@ -270,7 +260,6 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult DeleteTrainerAccount(string id)
         {
@@ -286,7 +275,6 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult TrainerInfoDetails(string id)
         {
@@ -302,7 +290,6 @@ namespace FPT_Management_System.Controllers
             return View(trainerInfoInDb);
         }
 
-        [Authorize(Roles = "admin")]
         public ActionResult TrainerPasswordReset(string id)
         {
             var trainerInDb = _context.Users.SingleOrDefault(i => i.Id == id);

@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using FPT_Management_System.Utils
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,19 +17,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("FPT Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.IsInRole("admin"))
+                        if (User.IsInRole(Role.Admin))
                         {
                             <li>@Html.ActionLink("Staff", "IndexStaff", "Admins")</li>
                             <li>@Html.ActionLink("Trainer", "IndexTrainer", "Admins")</li>
                         }
-                        else if (User.IsInRole("staff"))
+                        else if (User.IsInRole(Role.Staff))
                         {
                             <li>@Html.ActionLink("Categories", "Index", "CourseCategories")</li>
                             <li>@Html.ActionLink("Courses", "CourseIndex", "Courses")</li>
@@ -36,13 +36,15 @@
                             <li>@Html.ActionLink("Trainees & Courses", "GetTrainees", "CoursesAssign")</li>
                             <li>@Html.ActionLink("Trainer & Courses", "GetTrainers", "CoursesAssign")</li>
                         }
-                        else if (User.IsInRole("trainer"))
+                        else if (User.IsInRole(Role.Trainer))
                         {
-                            <li>@Html.ActionLink("My Profile", "TrainerInfoDetails", "Admins")</li>
+                            <li>@Html.ActionLink("My Profile", "TrainerProfile", "Trainer")</li>
+                            <li>@Html.ActionLink("My Courses", "GetTrainerCourses", "Trainer")</li>
                         }
-                        else if (User.IsInRole("trainee"))
+                        else if (User.IsInRole(Role.Trainee))
                         {
-                            <li>@Html.ActionLink("My Profile", "TraineeInfoDetails", "Staffs")</li>
+                            <li>@Html.ActionLink("My Profile", "TraineeProfile", "Trainee")</li>
+                            <li>@Html.ActionLink("My Courses", "GetTraineeCourses", "Trainee")</li>
                         }
                     }
                 </ul>
@@ -54,7 +56,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p style="text-align: center;">&copy; @DateTime.Now.Year - FPT MANAGEMENT SYSTEM</p>
         </footer>
     </div>
 

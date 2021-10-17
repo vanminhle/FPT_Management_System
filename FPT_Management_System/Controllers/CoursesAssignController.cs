@@ -1,4 +1,5 @@
 ﻿using FPT_Management_System.Models;
+using FPT_Management_System.Utils;
 using FPT_Management_System.ViewModels;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace FPT_Management_System.Controllers
 {
-    [Authorize(Roles = "staff")]
+    [Authorize(Roles = Role.Staff)]
     public class CoursesAssignController : Controller
     {
         private ApplicationDbContext _context;
@@ -35,9 +36,7 @@ namespace FPT_Management_System.Controllers
             if (!string.IsNullOrEmpty(searchString))
             {
                 viewModel = viewModel
-                    .Where(t => t.Course.Name
-                    .ToLower()
-                    .Contains(searchString.ToLower()))
+                    .Where(t => t.Course.Name.ToLower().Contains(searchString.ToLower()))
                     .ToList();
             }
             return View(viewModel);
@@ -114,7 +113,7 @@ namespace FPT_Management_System.Controllers
                 .SingleOrDefault(c => c.CourseId == model.CourseId && c.TrainerId == model.TrainerId);
             if (getTrainer == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("GetTrainers", "CoursesAssign");
             }
 
             _context.TrainersToCourses.Remove(getTrainer);
@@ -136,7 +135,7 @@ namespace FPT_Management_System.Controllers
                 .Select(res => new TraineeInCourseViewModels
                 {
                     Course = res.Key,
-                    Trainees = res.Select(u => u.Trainee).ToList()
+                    Trainees = res.Select(u => u.Trainee).ToList(),
                 })
                 .ToList();
 
@@ -148,6 +147,7 @@ namespace FPT_Management_System.Controllers
                     .Contains(searchString.ToLower()))
                     .ToList();
             }
+
             return View(viewModel);
         }
 
@@ -222,7 +222,7 @@ namespace FPT_Management_System.Controllers
                 .SingleOrDefault(c => c.CourseId == model.CourseId && c.TraineeId == model.TraineeId);
             if (getTrainee == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("GetTrainees", "CoursesAssign");
             }
 
             _context.TraineesToCourses.Remove(getTrainee);

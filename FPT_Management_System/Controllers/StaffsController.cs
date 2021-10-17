@@ -1,8 +1,10 @@
 ﻿using FPT_Management_System.Models;
+using FPT_Management_System.Utils;
 using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -10,6 +12,7 @@ using System.Web.Mvc;
 
 namespace FPT_Management_System.Controllers
 {
+    [Authorize(Roles = Role.Staff)]
     public class StaffsController : Controller
     {
         private ApplicationDbContext _context;
@@ -38,23 +41,28 @@ namespace FPT_Management_System.Controllers
             }
         }
 
-        [Authorize(Roles = "staff")]
-        public ActionResult IndexTrainee()
+        public ActionResult IndexTrainee(string searchTrainee)
         {
             var trainee = _context.Trainees.ToList();
             var user = _context.Users.ToList();
 
+            if (!String.IsNullOrEmpty(searchTrainee))
+            {
+                trainee = trainee
+                    .FindAll(s => s.FullName.ToLower().Contains(searchTrainee.ToLower())
+                            || s.Age.ToString().Contains(searchTrainee)
+                ).ToList();
+            }
+
             return View(trainee);
         }
 
-        [Authorize(Roles = "staff")]
         [HttpGet]
         public ActionResult CreateTraineeAccount()
         {
             return View();
         }
 
-        [Authorize(Roles = "staff")]
         [HttpPost]
         public async Task<ActionResult> CreateTraineeAccount(TraineeAccountViewModels viewModel)
         {
@@ -93,7 +101,6 @@ namespace FPT_Management_System.Controllers
             }
         }
 
-        [Authorize(Roles = "staff")]
         [HttpGet]
         public ActionResult EditTraineeAccount(string id)
         {
@@ -105,7 +112,6 @@ namespace FPT_Management_System.Controllers
             return View(traineeInDb);
         }
 
-        [Authorize(Roles = "staff")]
         [HttpPost]
         public ActionResult EditTraineeAccount(Trainee trainee)
         {
@@ -128,7 +134,6 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexTrainee", "Staffs");
         }
 
-        [Authorize(Roles = "staff")]
         [HttpGet]
         public ActionResult DeleteTraineeAccount(string id)
         {
@@ -144,7 +149,6 @@ namespace FPT_Management_System.Controllers
             return RedirectToAction("IndexTrainee", "Staffs");
         }
 
-        [Authorize(Roles = "staff")]
         [HttpGet]
         public ActionResult TraineeInfoDetails(string id)
         {
@@ -160,7 +164,6 @@ namespace FPT_Management_System.Controllers
             return View(traineeInfoInDb);
         }
 
-        [Authorize(Roles = "staff")]
         public ActionResult TraineePasswordReset(string id)
         {
             var traineeInDb = _context.Users.SingleOrDefault(i => i.Id == id);

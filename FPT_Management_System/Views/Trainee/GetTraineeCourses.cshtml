@@ -1,0 +1,31 @@
+﻿@model IEnumerable<FPT_Management_System.ViewModels.TraineeInCourseViewModels>
+@{
+    ViewBag.Title = "Get Trainee Courses";
+}
+
+<h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">My Assign Courses</h2>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Course Name</th>
+            <th scope="col">Trainees</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td>@item.Course.Name</td>
+                <td>
+                    <ul>
+                        @foreach (var trainee in item.Trainees)
+                        {
+                            <li>@trainee.FullName</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

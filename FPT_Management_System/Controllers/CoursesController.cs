@@ -1,4 +1,5 @@
 ﻿using FPT_Management_System.Models;
+using FPT_Management_System.Utils;
 using FPT_Management_System.ViewModels;
 using System.Data.Entity;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Web.Mvc;
 
 namespace FPT_Management_System.Controllers
 {
-    [Authorize(Roles = "staff")]
+    [Authorize(Roles = Role.Staff)]
     public class CoursesController : Controller
     {
         public ApplicationDbContext _context;
@@ -17,17 +18,17 @@ namespace FPT_Management_System.Controllers
         }
 
         [HttpGet]
-        public ActionResult CourseIndex(string searchString)
+        public ActionResult CourseIndex(string searchCourses)
         {
             var courses = _context.Courses
                 .Include(t => t.CourseCategory)
                 .ToList();
 
-            if (!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchCourses))
             {
                 courses = courses
-                    .Where(t => t.Description.ToLower().Contains(searchString.ToLower())
-                            || t.CourseCategory.Description.ToLower().Contains(searchString.ToLower())
+                    .Where(t => t.Name.ToLower().Contains(searchCourses.ToLower())
+                            || t.CourseCategory.Name.ToLower().Contains(searchCourses.ToLower())
                 ).ToList();
             }
 

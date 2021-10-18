@@ -9,5 +9,8 @@ namespace FPT_Management_System.ViewModels
         public Course Course { get; set; }
 
         public List<Trainee> Trainees { get; set; }
+
+        public ApplicationUser ApplicationUsers { get; set; }
     }
+
 }

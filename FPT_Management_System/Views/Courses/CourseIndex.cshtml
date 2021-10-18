@@ -3,9 +3,11 @@
     ViewBag.Title = "Courses";
 }
 
-<div class="page-header">
-    <h2 style="margin-bottom: 15px">List Of Courses</h2>
-</div>
+<h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">List Of Course</h2>
+
+<h4 style="margin-bottom: 15px; text-align: center; margin-top: 15px;" class="text-success">@TempData["Message"]</h4>
+
+<h4 style="margin-bottom: 15px; text-align: center; margin-top: 15px;" class="text-danger">@TempData["Error"]</h4>
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
     <div class="form-group">
@@ -39,7 +41,6 @@
                 <td style="vertical-align: middle">@item.CourseCategory.Name</td>
                 <td>
                     @Html.ActionLink("Edit Course", "CourseEdit", "Courses", new { id = @item.CourseID }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Details", "Details", "Todos", new { id = @item.CourseID }, new { @class = "btn btn-info" })
                     @Html.ActionLink("Delete Course", "CourseDelete", "Courses", new { id = @item.CourseID }, new { @class = "btn btn-danger" })
                 </td>
             </tr>

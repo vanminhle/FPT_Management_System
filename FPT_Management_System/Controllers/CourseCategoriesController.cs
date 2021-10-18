@@ -46,9 +46,9 @@ namespace FPT_Management_System.Controllers
                 return View("CreateCategory");
             }
             //check category
-            var check = _context.CourseCategories.Any(
+            var isExists = _context.CourseCategories.Any(
                 c => c.Name.Contains(category.Name));
-            if (check)
+            if (isExists)
             {
                 ModelState.AddModelError("", "Category Already Exists.");
                 return View("CreateCategory");

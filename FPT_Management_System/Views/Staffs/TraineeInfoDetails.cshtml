@@ -3,22 +3,8 @@
     ViewBag.Title = "TraineeInfoDetails";
 }
 
-<div class="page-header">
-    <h2 style="margin-bottom: 15px">Trainee Info Deatils</h2>
-</div>
+<h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">Trainee Info Details</h2>
 
-<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-    <div class="form-group">
-        @if (User.Identity.IsAuthenticated)
-        {
-            if (User.IsInRole("staff"))
-            {
-                @Html.ActionLink("Back to Trainee List ", "IndexTrainee", "Staffs", new { @class = "btn btn-primary" })
-
-            }
-        }
-    </div>
-</div>
 
 <div class="panel panel-default">
     <div class="panel-body">
@@ -26,5 +12,11 @@
         <p>Trainee Age: @Model.Age</p>
         <p>Trainee Date Of Birth: @Model.DateOfBirth.ToString("D")</p>
         <p>Trainee Education: @Model.Education</p>
+    </div>
+</div>
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+    <div class="form-group">
+        @Html.ActionLink("Back to Trainee List ", "IndexTrainee", "Staffs", new { @class = "btn btn-primary" })
     </div>
 </div>

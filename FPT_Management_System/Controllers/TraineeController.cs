@@ -1,8 +1,6 @@
 ﻿using FPT_Management_System.Models;
 using FPT_Management_System.Utils;
-using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -27,31 +25,26 @@ namespace FPT_Management_System.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetTraineeCourses()
+        public ActionResult GetCourses()
         {
+            var courseCategory = _context.CourseCategories.ToList();
             var userId = User.Identity.GetUserId();
-            var getTraineeCourses = _context.TraineesToCourses
+            var getCourses = _context.TraineesToCourses
                 .Where(t => t.Trainee.TraineeId == userId)
-                .Select(c => c.CourseId)
+                .Select(c => c.Course)
+                .ToList();
+            return View(getCourses);
+        }
+
+        [HttpGet]
+        public ActionResult GetTraineeInCourses(int id)
+        {
+            var getTraineeInCourses = _context.TraineesToCourses
+                .Where(t => t.CourseId == id)
+                .Select(t => t.Trainee)
                 .ToList();
 
-            List<TraineeInCourseViewModels> traineeInCourses = new List<TraineeInCourseViewModels>();
-
-            foreach (var courseId in getTraineeCourses)
-            {
-                var trainees = _context.TraineesToCourses
-                .Where(t => t.CourseId == courseId)
-                .GroupBy(c => c.Course)
-                .Select(res => new TraineeInCourseViewModels
-                {
-                    Course = res.Key,
-                    Trainees = res.Select(u => u.Trainee).ToList()
-                })
-                .ToList();
-                traineeInCourses.AddRange(trainees);
-            }
-
-            return View(traineeInCourses);
+            return View(getTraineeInCourses);
         }
     }
 }

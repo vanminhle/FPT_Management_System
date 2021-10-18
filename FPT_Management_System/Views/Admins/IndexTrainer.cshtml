@@ -3,8 +3,11 @@
     ViewBag.Title = "Index Trainer";
 }
 
-    <h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">List Of Trainer Account</h2>
+<h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">List Of Trainer Account</h2>
 
+<h4 style="margin-bottom: 15px; text-align: center; margin-top: 15px;" class="text-success">@TempData["Message"]</h4>
+
+<h4 style="margin-bottom: 15px; text-align: center; margin-top: 15px;" class="text-danger">@TempData["Error"]</h4>
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
     <div class="form-group">
@@ -29,7 +32,7 @@
                 <td>
                     @Html.ActionLink("Edit Trainer Info", "EditTrainerAccount", "Admins", new { id = @item.TrainerId }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Delete Trainer", "DeleteTrainerAccount", "Admins", new { id = @item.TrainerId }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Password Reset", "TrainerPasswordReset", "Admins", new { id = @item.TrainerId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Password Change", "TrainerPasswordChange", "Admins", new { id = @item.TrainerId }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Trainer Details", "TrainerInfoDetails", "Admins", new { id = @item.TrainerId }, new { @class = "btn btn-info" })
                 </td>
             </tr>

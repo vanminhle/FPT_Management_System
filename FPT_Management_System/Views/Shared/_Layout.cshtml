@@ -39,12 +39,12 @@
                         else if (User.IsInRole(Role.Trainer))
                         {
                             <li>@Html.ActionLink("My Profile", "TrainerProfile", "Trainer")</li>
-                            <li>@Html.ActionLink("My Courses", "GetTrainerCourses", "Trainer")</li>
+                            <li>@Html.ActionLink("My Courses", "GetCourses", "Trainer")</li>
                         }
                         else if (User.IsInRole(Role.Trainee))
                         {
                             <li>@Html.ActionLink("My Profile", "TraineeProfile", "Trainee")</li>
-                            <li>@Html.ActionLink("My Courses", "GetTraineeCourses", "Trainee")</li>
+                            <li>@Html.ActionLink("My Courses", "GetCourses", "Trainee")</li>
                         }
                     }
                 </ul>

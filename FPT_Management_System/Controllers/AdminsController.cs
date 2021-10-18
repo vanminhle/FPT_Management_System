@@ -19,15 +19,18 @@ namespace FPT_Management_System.Controllers
 
         private ApplicationUserManager _userManager;
 
+        private ApplicationSignInManager _signInManager;
+
         public AdminsController()
         {
             _context = new ApplicationDbContext();
         }
 
-        public AdminsController(ApplicationUserManager userManager)
+        public AdminsController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             _context = new ApplicationDbContext();
             UserManager = userManager;
+            SignInManager = signInManager;
         }
 
         public ApplicationUserManager UserManager
@@ -39,6 +42,18 @@ namespace FPT_Management_System.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -80,9 +95,14 @@ namespace FPT_Management_System.Controllers
                     _context.Staffs.Add(newStaff);
                     _context.SaveChanges();
                 }
+                else
+                {
+                    TempData["error"] = "Staff Account is Already Create";
+                    return RedirectToAction("IndexStaff", "Admins");
+                }
                 AddErrors(result);
             }
-
+            TempData["message"] = "Staff Account has Successfully Create";
             return RedirectToAction("IndexStaff", "Admins");
         }
 
@@ -123,7 +143,7 @@ namespace FPT_Management_System.Controllers
             staffInfoInDb.Age = staff.Age;
             staffInfoInDb.Address = staff.Address;
             _context.SaveChanges();
-
+            TempData["message"] = "Staff Info has Successfully Changed";
             return RedirectToAction("IndexStaff", "Admins");
         }
 
@@ -139,6 +159,7 @@ namespace FPT_Management_System.Controllers
             _context.Users.Remove(staffInDb);
             _context.Staffs.Remove(staffInfoInDb);
             _context.SaveChanges();
+            TempData["message"] = "Staff Account has Successfully Deleted";
             return RedirectToAction("IndexStaff", "Admins");
         }
 
@@ -157,29 +178,37 @@ namespace FPT_Management_System.Controllers
             return View(staffInfoInDb);
         }
 
-        public ActionResult StaffPasswordReset(string id)
+        [HttpGet]
+        public ActionResult StaffPasswordChange()
         {
-            var staffInDb = _context.Users.SingleOrDefault(i => i.Id == id);
-            if (staffInDb == null)
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult StaffPasswordChange(ChangePasswordViewModels viewModel, string id)
+        {
+            var userInDb = _context.Users.SingleOrDefault(i => i.Id == id);
+            if (userInDb == null)
             {
                 return HttpNotFound();
             }
             var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-            userId = staffInDb.Id;
+            userId = userInDb.Id;
+
             if (userId != null)
             {
                 UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
                 userManager.RemovePassword(userId);
-                string newPassword = "DefaultPassword@123";
+                string newPassword = viewModel.NewPassword;
                 userManager.AddPassword(userId, newPassword);
             }
             _context.SaveChanges();
+            TempData["message"] = "Staff password has Successfully changed";
             return RedirectToAction("IndexStaff", "Admins");
         }
 
-        /// <summary>
-        /// FOR TRAINER
-        /// </summary>
+        //FOR TRAINER
 
         [HttpGet]
         public ActionResult IndexTrainer()
@@ -220,9 +249,14 @@ namespace FPT_Management_System.Controllers
                     _context.Trainers.Add(newTrainer);
                     _context.SaveChanges();
                 }
+                else
+                {
+                    TempData["error"] = "Trainer Account is Already Create";
+                    return RedirectToAction("IndexTrainer", "Admins");
+                }
                 AddErrors(result);
             }
-
+            TempData["message"] = "Trainer Account has Successfully Create";
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
@@ -257,6 +291,7 @@ namespace FPT_Management_System.Controllers
 
             _context.SaveChanges();
 
+            TempData["message"] = "Trainer Info has Successfully Changed";
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
@@ -272,6 +307,8 @@ namespace FPT_Management_System.Controllers
             _context.Users.Remove(trainerInDb);
             _context.Trainers.Remove(trainerInfoInDb);
             _context.SaveChanges();
+
+            TempData["message"] = "Trainer Account has Successfully Deleted";
             return RedirectToAction("IndexTrainer", "Admins");
         }
 
@@ -290,23 +327,33 @@ namespace FPT_Management_System.Controllers
             return View(trainerInfoInDb);
         }
 
-        public ActionResult TrainerPasswordReset(string id)
+        [HttpGet]
+        public ActionResult TrainerPasswordChange()
         {
-            var trainerInDb = _context.Users.SingleOrDefault(i => i.Id == id);
-            if (trainerInDb == null)
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TrainerPasswordChange(ChangePasswordViewModels viewModel, string id)
+        {
+            var userInDb = _context.Users.SingleOrDefault(i => i.Id == id);
+            if (userInDb == null)
             {
                 return HttpNotFound();
             }
             var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-            userId = trainerInDb.Id;
+            userId = userInDb.Id;
+
             if (userId != null)
             {
                 UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
                 userManager.RemovePassword(userId);
-                string newPassword = "DefaultPassword@123";
+                string newPassword = viewModel.NewPassword;
                 userManager.AddPassword(userId, newPassword);
             }
             _context.SaveChanges();
+            TempData["message"] = "Trainer password has Successfully changed";
             return RedirectToAction("IndexTrainer", "Admins");
         }
     }

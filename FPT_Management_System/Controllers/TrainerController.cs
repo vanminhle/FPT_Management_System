@@ -1,8 +1,6 @@
 ﻿using FPT_Management_System.Models;
 using FPT_Management_System.Utils;
-using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -57,39 +55,32 @@ namespace FPT_Management_System.Controllers
 
             _context.SaveChanges();
 
+            TempData["Message"] = "Staff Account has Successfully Create";
             return RedirectToAction("TrainerProfile", "Trainer");
         }
 
         [HttpGet]
-        public ActionResult GetTrainerCourses()
+        public ActionResult GetCourses()
         {
+            var courseCategory = _context.CourseCategories.ToList();
+            var trainer = _context.Trainers.ToList();
             var userId = User.Identity.GetUserId();
-
-            var getCourses = _context.Courses.ToList();
-            var getTrainee = _context.Trainees.ToList();
-
-            var getTrainerCourses = _context.TrainersToCourses
+            var getCourses = _context.TrainersToCourses
                 .Where(t => t.Trainer.TrainerId == userId)
-                .Select(c => c.CourseId)
+                .Select(c => c.Course)
+                .ToList();
+            return View(getCourses);
+        }
+
+        [HttpGet]
+        public ActionResult GetTraineeInCourses(int id)
+        {
+            var getTraineeInCourses = _context.TraineesToCourses
+                .Where(t => t.CourseId == id)
+                .Select(t => t.Trainee)
                 .ToList();
 
-            List<TraineeInCourseViewModels> traineeInCourses = new List<TraineeInCourseViewModels>();
-
-            foreach (var courseId in getTrainerCourses)
-            {
-                var trainees = _context.TraineesToCourses
-                .Where(t => t.CourseId == courseId)
-                .GroupBy(c => c.Course)
-                .Select(res => new TraineeInCourseViewModels
-                {
-                    Course = res.Key,
-                    Trainees = res.Select(u => u.Trainee).ToList()
-                })
-                .ToList();
-                traineeInCourses.AddRange(trainees);
-            }
-
-            return View(traineeInCourses);
+            return View(getTraineeInCourses);
         }
     }
 }

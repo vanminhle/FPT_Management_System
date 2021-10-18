@@ -3,9 +3,11 @@
     ViewBag.Title = "IndexTrainee";
 }
 
-<div class="page-header">
-    <h2 style="margin-bottom: 15px">List Of Trainee Account</h2>
-</div>
+<h2 style="margin-bottom: 15px; text-align: center; margin-top: 45px;">List Of Trainee Account</h2>
+
+<h4 style="margin-bottom: 15px; text-align: center; margin-top: 15px;" class="text-success">@TempData["Message"]</h4>
+
+<h4 style="margin-bottom: 15px; text-align: center; margin-top: 15px;" class="text-danger">@TempData["Error"]</h4>
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
     <div class="form-group">
@@ -40,7 +42,6 @@
                 <td>
                     @Html.ActionLink("Edit Trainee Info", "EditTraineeAccount", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Delete Trainee", "DeleteTraineeAccount", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Password Reset", "TraineePasswordReset", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-success" })
                     @Html.ActionLink("Trainee Details", "TraineeInfoDetails", "Staffs", new { id = @item.TraineeId }, new { @class = "btn btn-info" })
                 </td>
             </tr>

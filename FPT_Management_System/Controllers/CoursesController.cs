@@ -59,6 +59,12 @@ namespace FPT_Management_System.Controllers
                 return View(viewModel);
             }
 
+            var isExists = _context.Courses.Any(c => c.Name.Contains(model.Courses.Name));
+            if (isExists)
+            {
+                TempData["error"] = "Course is already exists";
+                return RedirectToAction("CourseIndex", "Courses");
+            }
             var newCourse = new Course()
             {
                 Name = model.Courses.Name,
@@ -69,6 +75,7 @@ namespace FPT_Management_System.Controllers
             _context.Courses.Add(newCourse);
             _context.SaveChanges();
 
+            TempData["message"] = "Course create successfully";
             return RedirectToAction("CourseIndex", "Courses");
         }
 
@@ -85,6 +92,7 @@ namespace FPT_Management_System.Controllers
             _context.Courses.Remove(courseInDb);
             _context.SaveChanges();
 
+            TempData["message"] = "Course information is successfully deleted";
             return RedirectToAction("CourseIndex", "Courses");
         }
 
@@ -111,12 +119,14 @@ namespace FPT_Management_System.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new CourseCategoriesViewModels
-                {
-                    Courses = model.Courses,
-                    CourseCategories = _context.CourseCategories.ToList()
-                };
-                return View(viewModel);
+                return HttpNotFound();
+            }
+
+            var isExists = _context.Courses.Any(c => c.Name.Contains(model.Courses.Name));
+            if (isExists)
+            {
+                TempData["error"] = "Course is already exists";
+                return RedirectToAction("CourseIndex", "Courses");
             }
 
             var courseInDb = _context.Courses
@@ -131,6 +141,7 @@ namespace FPT_Management_System.Controllers
             courseInDb.CategoryId = model.Courses.CategoryId;
 
             _context.SaveChanges();
+            TempData["message"] = "Course information is successfully changed";
             return RedirectToAction("CourseIndex", "Courses");
         }
     }

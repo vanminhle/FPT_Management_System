@@ -86,6 +86,7 @@ namespace FPT_Management_System.Controllers
 
             _context.TrainersToCourses.Add(viewModel);
             _context.SaveChanges();
+            TempData["success"] = "Add Trainer to course successfully";
             return RedirectToAction("GetTrainers", "CoursesAssign");
         }
 
@@ -113,12 +114,14 @@ namespace FPT_Management_System.Controllers
                 .SingleOrDefault(c => c.CourseId == model.CourseId && c.TrainerId == model.TrainerId);
             if (getTrainer == null)
             {
+                TempData["message"] = "That Trainee is not in this course";
                 return RedirectToAction("GetTrainers", "CoursesAssign");
             }
 
             _context.TrainersToCourses.Remove(getTrainer);
             _context.SaveChanges();
 
+            TempData["message"] = "Trainer remove successfully";
             return RedirectToAction("GetTrainers", "CoursesAssign");
         }
 
@@ -195,6 +198,7 @@ namespace FPT_Management_System.Controllers
                 _context.SaveChanges();
             }
 
+            TempData["success"] = "Add Trainee to course successfully";
             return RedirectToAction("GetTrainees", "CoursesAssign");
         }
 
@@ -222,12 +226,14 @@ namespace FPT_Management_System.Controllers
                 .SingleOrDefault(c => c.CourseId == model.CourseId && c.TraineeId == model.TraineeId);
             if (getTrainee == null)
             {
+                TempData["message"] = "That Trainee is not in this course";
                 return RedirectToAction("GetTrainees", "CoursesAssign");
             }
 
             _context.TraineesToCourses.Remove(getTrainee);
             _context.SaveChanges();
 
+            TempData["message"] = "Trainee remove successfully";
             return RedirectToAction("GetTrainees", "CoursesAssign");
         }
     }

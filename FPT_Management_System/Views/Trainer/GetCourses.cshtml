@@ -1,0 +1,30 @@
+﻿@model IEnumerable<FPT_Management_System.Models.Course>
+@{
+    ViewBag.Title = "Trainer Assign Courses";
+}
+
+<h2 style="margin-bottom: 35px; text-align: center; margin-top: 45px;">My Assign Courses</h2>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Course Name</th>
+            <th scope="col">Course Description</th>
+            <th scope="col">Course Category</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <th style="vertical-align: middle" scope="row">@item.Name</th>
+                <td style="vertical-align: middle">@item.Description</td>
+                <td style="vertical-align: middle">@item.CourseCategory.Name</td>
+                <td>
+                    @Html.ActionLink("Details", "GetTraineeInCourses", "Trainer", new { id = item.CourseID }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

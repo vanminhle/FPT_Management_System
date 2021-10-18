@@ -2,7 +2,6 @@
 using FPT_Management_System.Utils;
 using FPT_Management_System.ViewModels;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Linq;
@@ -87,9 +86,14 @@ namespace FPT_Management_System.Controllers
                     _context.Trainees.Add(newTrainee);
                     _context.SaveChanges();
                 }
+                else
+                {
+                    TempData["error"] = "Trainee account is already exists";
+                    return RedirectToAction("IndexTrainee", "Staffs");
+                }
                 AddErrors(result);
             }
-
+            TempData["messages"] = "Trainee account successfully create";
             return RedirectToAction("IndexTrainee", "Staffs");
         }
 
@@ -125,12 +129,15 @@ namespace FPT_Management_System.Controllers
             {
                 return HttpNotFound();
             }
+
+
             traineeInfoInDb.FullName = trainee.FullName;
             traineeInfoInDb.Age = trainee.Age;
             traineeInfoInDb.DateOfBirth = trainee.DateOfBirth;
             traineeInfoInDb.Education = trainee.Education;
             _context.SaveChanges();
 
+            TempData["messages"] = "Trainee information is successfully changed";
             return RedirectToAction("IndexTrainee", "Staffs");
         }
 
@@ -146,6 +153,8 @@ namespace FPT_Management_System.Controllers
             _context.Users.Remove(traineeInDb);
             _context.Trainees.Remove(traineeInfoInDb);
             _context.SaveChanges();
+
+            TempData["messages"] = "Trainee account is successfully deleted";
             return RedirectToAction("IndexTrainee", "Staffs");
         }
 
@@ -162,26 +171,6 @@ namespace FPT_Management_System.Controllers
                 return HttpNotFound();
             }
             return View(traineeInfoInDb);
-        }
-
-        public ActionResult TraineePasswordReset(string id)
-        {
-            var traineeInDb = _context.Users.SingleOrDefault(i => i.Id == id);
-            if (traineeInDb == null)
-            {
-                return HttpNotFound();
-            }
-            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
-            userId = traineeInDb.Id;
-            if (userId != null)
-            {
-                UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
-                userManager.RemovePassword(userId);
-                string newPassword = "DefaultPassword@123";
-                userManager.AddPassword(userId, newPassword);
-            }
-            _context.SaveChanges();
-            return RedirectToAction("IndexTrainee", "Staffs");
         }
     }
 }

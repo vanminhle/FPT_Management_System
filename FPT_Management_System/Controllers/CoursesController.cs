@@ -68,7 +68,7 @@ namespace FPT_Management_System.Controllers
             var newCourse = new Course()
             {
                 Name = model.Courses.Name,
-                Description = model.Courses.Description,
+                Description = model.Courses.Name,
                 CategoryId = model.Courses.CategoryId,
             };
 

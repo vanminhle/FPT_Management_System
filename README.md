@@ -24,8 +24,8 @@ This is the project for Assignment 2 Application Development
 
 #### Admin Login
 
-Account : admin_01@admin.com / Admin_01@admin.com
+- Account : admin_01@admin.com / Admin_01@admin.com
 
 #### Staff Login (Default Account)
 
-Account : staff_01@staff.com / Staff_01@staff.com
+- Account : staff_01@staff.com / Staff_01@staff.com

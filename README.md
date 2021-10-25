@@ -22,6 +22,9 @@ This is the project for Assignment 2 Application Development
   
 ## FAQ
 
+#### Demo Website (Sometimes down because i down have money so i turning it off)
+http://fptmanagementsystem.azurewebsites.net/
+
 #### Admin Login
 
 - Account : admin_01@admin.com / Admin_01@admin.com

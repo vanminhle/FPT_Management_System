@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fptmanagementsystem/databases/FPTManagementSystemDb",
+      "type": "mssql.azure",
+      "connectionId": "FPTManagementSystemAzure",
+      "secretStore": null
+    }
+  }
+}

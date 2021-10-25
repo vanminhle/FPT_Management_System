@@ -6,7 +6,7 @@ namespace FPT_Management_System.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("FPTManagementSystem", throwIfV1Schema: false)
+            : base("FPTManagementSystemAzure", throwIfV1Schema: false)
         {
         }
 

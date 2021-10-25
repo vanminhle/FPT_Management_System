@@ -19,6 +19,10 @@ This is the project for Assignment 2 Application Development
 - Database : SQLServer
 - Git Client
 
+## Live
+
+(Sometimes down because i down have money so i turning it off)
+http://fptmanagementsystem.azurewebsites.net/
   
 ## FAQ
 

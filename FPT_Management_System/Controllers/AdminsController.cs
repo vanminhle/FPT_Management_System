@@ -193,7 +193,7 @@ namespace FPT_Management_System.Controllers
             {
                 return HttpNotFound();
             }
-            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
             userId = userInDb.Id;
 
             if (userId != null)
@@ -342,10 +342,10 @@ namespace FPT_Management_System.Controllers
             {
                 return HttpNotFound();
             }
-            var userId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
             userId = userInDb.Id;
 
-            if (userId != null)
+            if (userInDb == null)
             {
                 UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
                 userManager.RemovePassword(userId);

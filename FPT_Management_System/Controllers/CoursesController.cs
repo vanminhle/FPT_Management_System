@@ -122,7 +122,8 @@ namespace FPT_Management_System.Controllers
                 return HttpNotFound();
             }
 
-            var isExists = _context.Courses.Any(c => c.Name.Contains(model.Courses.Name));
+            var isExists = _context.Courses.Any
+                (c => c.Name.Equals(model.Courses.Name));
             if (isExists)
             {
                 TempData["error"] = "Course is already exists";

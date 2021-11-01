@@ -11,3 +11,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "RCS1155:Use StringComparison when comparing strings.", Justification = "<Pending>", Scope = "member", Target = "~M:FPT_Management_System.Controllers.StaffsController.IndexTrainee(System.String)~System.Web.Mvc.ActionResult")]
 [assembly: SuppressMessage("Usage", "RCS1155:Use StringComparison when comparing strings.", Justification = "<Pending>", Scope = "member", Target = "~M:FPT_Management_System.Controllers.CourseCategoriesController.Index(System.String)~System.Web.Mvc.ActionResult")]
 [assembly: SuppressMessage("Design", "RCS1102:Make class static.", Justification = "<Pending>", Scope = "type", Target = "~T:FPT_Management_System.BundleConfig")]
+[assembly: SuppressMessage("Design", "RCS1102:Make class static.", Justification = "<Pending>", Scope = "type", Target = "~T:FPT_Management_System.RouteConfig")]

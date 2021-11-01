@@ -196,7 +196,7 @@ namespace FPT_Management_System.Controllers
             var userId = User.Identity.GetUserId();
             userId = userInDb.Id;
 
-            if (userId != null)
+            if (userInDb == null)
             {
                 UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
                 userManager.RemovePassword(userId);

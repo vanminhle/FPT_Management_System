@@ -301,6 +301,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config" />
+    <None Include="Properties\PublishProfiles\appdevmanagementsystem - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\appdevmanagementsystem - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FPTManagementSystem - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\FPTManagementSystem - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />

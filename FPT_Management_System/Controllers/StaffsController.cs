@@ -65,7 +65,7 @@ namespace FPT_Management_System.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateTraineeAccount(TraineeAccountViewModels viewModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 { UserName = viewModel.RegisterViewModels.Email, Email = viewModel.RegisterViewModels.Email };

@@ -75,12 +75,13 @@ namespace FPT_Management_System.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateStaffAccount(StaffAccountViewModels viewModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 { UserName = viewModel.RegisterViewModels.Email, Email = viewModel.RegisterViewModels.Email };
                 var result = await UserManager.CreateAsync(user, viewModel.RegisterViewModels.Password);
                 var staffId = user.Id;
+
                 var newStaff = new Staff()
                 {
                     StaffId = staffId,
@@ -114,7 +115,6 @@ namespace FPT_Management_System.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult EditStaffAccount(string id)
         {
@@ -228,7 +228,7 @@ namespace FPT_Management_System.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateTrainerAccount(TrainerAccountViewModels viewModel)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 { UserName = viewModel.RegisterViewModels.Email, Email = viewModel.RegisterViewModels.Email };

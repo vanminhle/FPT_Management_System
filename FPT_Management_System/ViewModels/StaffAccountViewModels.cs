@@ -7,7 +7,5 @@ namespace FPT_Management_System.ViewModels
         public RegisterViewModel RegisterViewModels { get; set; }
 
         public Staff Staffs { get; set; }
-
-        public ApplicationUser StaffUsers { get; set; }
     }
 }

@@ -166,8 +166,6 @@ namespace FPT_Management_System.Controllers
         [HttpGet]
         public ActionResult StaffInfoDetails(string id)
         {
-            var staffId = User.Identity.GetUserId();
-
             var staffInfoInDb = _context.Staffs
                 .SingleOrDefault(t => t.StaffId == id);
 
@@ -194,7 +192,6 @@ namespace FPT_Management_System.Controllers
                 return HttpNotFound();
             }
             var userId = User.Identity.GetUserId();
-            userId = userInDb.Id;
 
             if (userInDb == null)
             {
@@ -315,8 +312,6 @@ namespace FPT_Management_System.Controllers
         [HttpGet]
         public ActionResult TrainerInfoDetails(string id)
         {
-            var trainerId = User.Identity.GetUserId();
-
             var trainerInfoInDb = _context.Trainers
                 .SingleOrDefault(t => t.TrainerId == id);
 

@@ -161,7 +161,6 @@ namespace FPT_Management_System.Controllers
         [HttpGet]
         public ActionResult TraineeInfoDetails(string id)
         {
-            var traineeId = User.Identity.GetUserId();
 
             var traineeInfoInDb = _context.Trainees
                 .SingleOrDefault(t => t.TraineeId == id);

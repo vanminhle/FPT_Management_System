@@ -10,7 +10,6 @@ This is the project for Assignment 2 Application Development
 - Trainer Login, View His/Her Profile, view Course that they assgin
 - Trainee Login, View His/Her Profile, view Course that they assgin
 
-
   
 ## Appendix
 
@@ -21,10 +20,9 @@ This is the project for Assignment 2 Application Development
 
 ## Live
 
-(Sometimes down because i down have money so i turning it off)
-http://fptmanagementsystem.azurewebsites.net/
+https://appdevmanagementsystem.azurewebsites.net
   
-## FAQ
+## Testing
 
 #### Admin Login
 
@@ -33,3 +31,4 @@ http://fptmanagementsystem.azurewebsites.net/
 #### Staff Login (Default Account)
 
 - Account : staff_01@staff.com / Staff_01@staff.com
+

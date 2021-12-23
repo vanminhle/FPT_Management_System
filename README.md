@@ -20,7 +20,7 @@ This is the project for Assignment 2 Application Development
 
 ## Live
 
-https://appdevmanagementsystem.azurewebsites.net
+https://appdevmanagementsystem.azurewebsites.net // Not Available 
   
 ## Testing
 
